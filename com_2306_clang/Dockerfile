@@ -24,10 +24,10 @@ WORKDIR /home/openfoam/OpenFOAM-${OPENFOAM_VERSION}
 
 # Source OpenFOAM environment and build with Clang
 RUN bash -lc "\
-    export WM_COMPILER=Clang && \
-    export CC=clang && \
-    export CXX=clang++ && \
     source etc/bashrc && \
+    export WM_COMPILER=Clang && \
+    export WM_CC=clang && \
+    export WM_CXX=clang++ && \
     cd ../ThirdParty-${OPENFOAM_VERSION} && \
     ./Allwmake && \
     cd ../OpenFOAM-${OPENFOAM_VERSION} && \
