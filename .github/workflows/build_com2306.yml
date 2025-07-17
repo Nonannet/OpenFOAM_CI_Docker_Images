@@ -1,4 +1,4 @@
-name: Simple Docker Build & Push
+name: Build & Push com_2306
 
 on:
   push:
