@@ -12,27 +12,27 @@ permissions:
 jobs:
   docker-build:
     runs-on: ubuntu-latest
-
     strategy:
-      include:
-        - of_fork: com
-          compiler: gcc
-          version: "2306"
-        - of_fork: com
-          compiler: clang
-          version: "2306"
-        - of_fork: com
-          compiler: gcc
-          version: "2412"
-        - of_fork: com
-          compiler: clang
-          version: "2412"
-        - of_fork: org
-          compiler: gcc
-          version: "12"
-        - of_fork: org
-          compiler: gcc
-          version: "13"
+      matrix:
+        include:
+          - of_fork: com
+            compiler: gcc
+            version: "2306"
+          - of_fork: com
+            compiler: clang
+            version: "2306"
+          - of_fork: com
+            compiler: gcc
+            version: "2412"
+          - of_fork: com
+            compiler: clang
+            version: "2412"
+          - of_fork: org
+            compiler: gcc
+            version: "12"
+          - of_fork: org
+            compiler: gcc
+            version: "13"
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
