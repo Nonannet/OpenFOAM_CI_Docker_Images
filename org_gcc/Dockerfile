@@ -2,7 +2,7 @@
 FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG OPENFOAM_VERSION="13"
+ARG OPENFOAM_VERSION="12"
 
 # Install build dependencies
 RUN apt-get update && \
