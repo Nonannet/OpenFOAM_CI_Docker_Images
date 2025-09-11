@@ -53,10 +53,21 @@ jobs:
           IMAGE_NAME="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${GITHUB_REPOSITORY,,}_${{ matrix.of_fork }}_${{ matrix.compiler }}:${{ matrix.version }}"
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
+      - name: Check if image exists
+        id: check_image
+        run: |
+          if docker manifest inspect $IMAGE_NAME > /dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build Docker image
+        if: steps.check_image.outputs.exists == 'false'
         run: |
           docker build -t $IMAGE_NAME --build-arg OPENFOAM_VERSION=${{ matrix.version }} ./${{ matrix.of_fork }}_${{ matrix.compiler }}/
 
       - name: Push Docker image
+        if: steps.check_image.outputs.exists == 'false'
         run: |
           docker push $IMAGE_NAME
